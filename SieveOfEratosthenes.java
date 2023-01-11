@@ -3,9 +3,10 @@ import java.util.*;
 class SieveOfEratosthenes {
     ArrayList<Integer> sieveOfEratosthenes(int n) {
         boolean[] arr = make_array(n);
-        for (int i = 0 ; i < arr.length ; i++) {
+        //only need to check up to the sqrt
+        for (int i = 0 ; i < Math.sqrt(arr.length) ; i++) {
             if (arr[i] == true) {
-                for (int j = i * 2 ; j < arr.length ; j = j + i) {
+                for (int j = (int) Math.round(Math.pow(i, 2)) ; j < arr.length ; j = j + i) {
                     arr[j] = false;
                 }
             }
@@ -15,7 +16,12 @@ class SieveOfEratosthenes {
     private boolean[] make_array(int n) {
         boolean[] arr = new boolean[n+1];
         for (int i = 0 ; i < arr.length ; i++) {
-            arr[i] = true;
+            //premark all even
+            if (i%2 == 0 & i != 2) {
+                arr[i] = false;
+            } else {
+                arr[i] = true;
+            }
         }
         arr[0] = false;
         arr[1] = false;
